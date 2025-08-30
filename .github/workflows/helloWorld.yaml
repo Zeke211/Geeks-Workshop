@@ -1,13 +1,12 @@
-
 name: helloWorld
 
 on:
-- push
+  - push
 #one or more jobs
 jobs:
   greetings:
     runs-on: macos-latest
-    steps: 
+    steps:
       - id: s00
         #running some shell bash command
         run: echo "Current time in GitHub is $(date), ${GITHUB_OUTPUT}"
@@ -15,8 +14,7 @@ jobs:
         #create a value and pass to the next step
         run: echo "CURR_DATE=$(date)" >> $GITHUB_OUTPUT
       - id: s02
-        #step - context
-        uses: mscountermarsh/cowsays-action@master
+        uses: mister-cow/cowsay-action@v1
         with:
-          text: 'Moo moo cow! ${{steps.s01.outputs.CURR_DATE}}'
+          text: "Moo moo cow! ${{steps.s01.outputs.CURR_DATE}}"
           color: green
